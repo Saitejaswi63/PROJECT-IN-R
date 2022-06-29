@@ -1,0 +1,91 @@
+---
+title: "Web-Traffic Forecasting"
+author: "Tejaswi Sai"
+date: '2022-06-27'
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+#install.packages("cowplot")
+library(data.table)
+library(dplyr)
+library(padr)
+library(xgboost)
+library(Matrix)
+library(RcppRoll)
+library(zoo)
+library(readr)
+library(sqldf)
+library(ggplot2)
+library(cowplot)
+library(WVPlots)
+```
+## Abstract
+Web traffic forecasting in the recent days have become a major problem as it can cause failures in the normal functionalty of major websites. Application of machine learning algorithms for predictive models is a popular topic of research. In the industry, where technology has been advancing everyday, performing predictions on the web traffic has been a major problem. The process of web traffic forecasting has been experienced with a number of issues which include classification and analysis to forecasting. Therefore, to help in solving these problems, an implementation of machine learning predictive model would be the best solution. This paper therfore has implemented a time series predictive model that helps in web traffic forecasting. The project has utilised a dataset that is already available on Kaggle.com website. Apart from forecasting, the project has identified the factors for consideration in web traffic forecasting and their severity to the normal functionality of the major websites. RStudio has been used for this project. 
+
+## Introduction
+
+With the increased availability of digital devices like phones and laptops more and more people are having access to the internet at any place and anytime all over the world and this has caused an increase in traffic for most of the websites. The increased traffic poses a major problem to the websites and the hosting companies as they try to cope with the changes in traffic in the most effective and efficient way. This is because they need to ensure no inconviniences are caused to the website users eithe by having slow load time or crashed site. This therefore brings in the need for a strategy the is most suitable in reducing such challenges. With the development of a predictive model for web traffic forecasting in this paper, a solution to the challenges will be found. 
+
+##Literature Review
+
+In the network design and management, the prediction, analysis, and model simulation of the internet traffic always play a very critical role. In the study by Chen et al. (2018), they proposes a modified LSL algorithm that could predict the web traffic and modify parameters at a high accuracy and fast convergence. The research applied time series that ensured the adaptave ability of the predictive model (Chen et al., 2018). According to Kafi et al. (2014),it is always essential to have internet traffic information in a timely and accurate manner for applications like admission control, bandwidth allocation, congestion control, and anomaly detection. Therefore, with the identified previous works suggestions, there came a need to have this project where we implement the machine learning algorithm for web traffic forecasting. The project answers the research question of what are the main contributing factors to traffic congestion for websites. 
+## Data
+
+```{r echo=FALSE}
+web_traffic<-read_csv("C:/Users/User/Downloads/webtraffic.csv")
+head(web_traffic)
+```
+check for any missing values.
+```{r}
+sapply(web_traffic,function(x) sum(is.na(x)))
+```
+Remove any duplicates.
+```{r}
+
+unique_data_interactions<-unique(web_traffic)
+```
+## Methodology
+
+With the data having been cleaned next willinvolve analyis on the data and creating the predictoive model. 
+
+```{r}
+x <- ggplot(web_traffic, aes(date,visits)) +
+  geom_jitter(aes(color = visits), alpha = 0.7) +
+  theme_light()
+title <- ggdraw() + draw_label("Date and visits", fontface='bold')
+plot_grid(title,x, ncol=1, rel_heights=c(0.1, 1))
+```
+## Results
+
+From the analysis, it is clear that there was an association between dates and the number of visits to the website by the users. In most cases, there was a high number of visits in days allocated for weekdays unlike weekdays. This is because, during weekdays alot of people are engaged in activities especially work related. 
+```{r}
+x <- ggplot(web_traffic, aes(date,visits)) +
+  geom_jitter(aes(color = visits), alpha = 0.7) +
+  theme_light()
+title <- ggdraw() + draw_label("Date and visits", fontface='bold')
+plot_grid(title,x, ncol=1, rel_heights=c(0.1, 1))
+```
+
+## Implications
+
+For future works, it would be recommeded that a NLP machine learning algorithm be implemented for the web traffic forecasting. More sample data should be collected for proper and accurate analysis. 
+
+## Conclusion
+
+The project performed analysis on the web traffic and predictions on what factors affect the availability of webservices. Time was the main factor since at different times there were varying number of visits to the website. 
+
+## References
+
+Chen, J. F., Lo, S. K., & Do, Q. H. (2018). Forecasting short-term traffic flow by fuzzy wavelet neural network with parameters optimized by biogeography-based optimization algorithm. Computational intelligence and neuroscience, 2018.
+
+Kafi, M. A., Djenouri, D., Ben-Othman, J., & Badache, N. (2014). Congestion control protocols in wireless sensor networks: A survey. IEEE communications surveys & tutorials, 16(3), 1369-1390.
+
+
+
+
+
+
+
+

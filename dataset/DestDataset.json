@@ -1,0 +1,24 @@
+{
+	"name": "DestDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageConnection",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "HRdataObtained",
+				"folderPath": "Sinkfile",
+				"container": "destcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

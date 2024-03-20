@@ -12,7 +12,7 @@
 				"type": "AzureBlobStorageLocation",
 				"fileName": "dataobtained",
 				"folderPath": "output",
-				"container": "Outputcontainer"
+				"container": "outputcontainer"
 			}
 		}
 	}
